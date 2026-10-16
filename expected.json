@@ -1,0 +1,248 @@
+[
+ {
+  "fn": "wattTruth",
+  "args": [
+   1000,
+   100
+  ],
+  "out": "The box claims 1000 watts and the wall meter reads 100 - 10.0% of the claim, about a tenth honestly."
+ },
+ {
+  "fn": "wattTruth",
+  "args": [
+   600,
+   150
+  ],
+  "out": "The box claims 600 watts and the wall meter reads 150 - 25.0% of the claim, about a third honestly."
+ },
+ {
+  "fn": "wattTruth",
+  "args": [
+   100,
+   95
+  ],
+  "out": "The box claims 100 watts and the wall meter reads 95 - 95.0% of the claim, most of the claim honestly."
+ },
+ {
+  "fn": "wattTruth",
+  "args": [
+   800,
+   160
+  ],
+  "out": "The box claims 800 watts and the wall meter reads 160 - 20.0% of the claim, about a fifth honestly."
+ },
+ {
+  "fn": "wattTruth",
+  "args": [
+   400,
+   180
+  ],
+  "out": "The box claims 400 watts and the wall meter reads 180 - 45.0% of the claim, about half honestly."
+ },
+ {
+  "fn": "wattTruth",
+  "args": [
+   1,
+   1
+  ],
+  "out": "The box claims 1 watt and the wall meter reads 1 - 100.0% of the claim, most of the claim honestly."
+ },
+ {
+  "fn": "wattTruth",
+  "args": [
+   0,
+   100
+  ],
+  "err": "the claimed watts must be above zero"
+ },
+ {
+  "fn": "wattTruth",
+  "args": [
+   1000,
+   0
+  ],
+  "err": "the wall draw must be above zero"
+ },
+ {
+  "fn": "wattTruth",
+  "args": [
+   1000,
+   -5
+  ],
+  "err": "the wall draw must be above zero"
+ },
+ {
+  "fn": "dliTruth",
+  "args": [
+   800,
+   12,
+   24,
+   16
+  ],
+  "out": "The chart's 800 \u00b5mol at 12 inches hangs at 24 inches as 200.0 \u00b5mol; 16 hours a day grows a DLI of 11.5 honestly."
+ },
+ {
+  "fn": "dliTruth",
+  "args": [
+   600,
+   18,
+   12,
+   12
+  ],
+  "out": "The chart's 600 \u00b5mol at 18 inches hangs at 12 inches as 1350.0 \u00b5mol; 12 hours a day grows a DLI of 58.3 honestly."
+ },
+ {
+  "fn": "dliTruth",
+  "args": [
+   800,
+   12,
+   12,
+   16
+  ],
+  "out": "The chart's 800 \u00b5mol at 12 inches hangs at 12 inches as 800.0 \u00b5mol; 16 hours a day grows a DLI of 46.1 honestly."
+ },
+ {
+  "fn": "dliTruth",
+  "args": [
+   500,
+   12,
+   30,
+   10
+  ],
+  "out": "The chart's 500 \u00b5mol at 12 inches hangs at 30 inches as 80.0 \u00b5mol; 10 hours a day grows a DLI of 2.9 honestly."
+ },
+ {
+  "fn": "dliTruth",
+  "args": [
+   900,
+   6,
+   18,
+   18
+  ],
+  "out": "The chart's 900 \u00b5mol at 6 inches hangs at 18 inches as 100.0 \u00b5mol; 18 hours a day grows a DLI of 6.5 honestly."
+ },
+ {
+  "fn": "dliTruth",
+  "args": [
+   1000,
+   24,
+   24,
+   1
+  ],
+  "out": "The chart's 1000 \u00b5mol at 24 inches hangs at 24 inches as 1000.0 \u00b5mol; 1 hour a day grows a DLI of 3.6 honestly."
+ },
+ {
+  "fn": "dliTruth",
+  "args": [
+   0,
+   12,
+   24,
+   16
+  ],
+  "err": "the chart PPFD must be above zero"
+ },
+ {
+  "fn": "dliTruth",
+  "args": [
+   800,
+   0,
+   24,
+   16
+  ],
+  "err": "the chart height must be above zero"
+ },
+ {
+  "fn": "dliTruth",
+  "args": [
+   800,
+   12,
+   0,
+   16
+  ],
+  "err": "the hanging height must be above zero"
+ },
+ {
+  "fn": "dliTruth",
+  "args": [
+   800,
+   12,
+   24,
+   0
+  ],
+  "err": "the daily hours must be above zero"
+ },
+ {
+  "fn": "dliTruth",
+  "args": [
+   800,
+   12,
+   24,
+   25
+  ],
+  "err": "the daily hours must be 24 or fewer"
+ },
+ {
+  "fn": "needTruth",
+  "args": [
+   11.5,
+   1
+  ],
+  "out": "A moderate crop asks for a DLI of 14.0; the lamp delivers 11.5 - 2.5 short honestly."
+ },
+ {
+  "fn": "needTruth",
+  "args": [
+   46.1,
+   2
+  ],
+  "out": "A hungry crop asks for a DLI of 20.0; the lamp delivers 46.1 - a margin of 26.1 honestly."
+ },
+ {
+  "fn": "needTruth",
+  "args": [
+   11.5,
+   0
+  ],
+  "out": "A gentle crop asks for a DLI of 8.0; the lamp delivers 11.5 - a margin of 3.5 honestly."
+ },
+ {
+  "fn": "needTruth",
+  "args": [
+   8.0,
+   0
+  ],
+  "out": "A gentle crop asks for a DLI of 8.0; the lamp delivers 8.0 - exactly matched honestly."
+ },
+ {
+  "fn": "needTruth",
+  "args": [
+   7.9,
+   0
+  ],
+  "out": "A gentle crop asks for a DLI of 8.0; the lamp delivers 7.9 - 0.1 short honestly."
+ },
+ {
+  "fn": "needTruth",
+  "args": [
+   20.04,
+   2
+  ],
+  "out": "A hungry crop asks for a DLI of 20.0; the lamp delivers 20.0 - exactly matched honestly."
+ },
+ {
+  "fn": "needTruth",
+  "args": [
+   0,
+   1
+  ],
+  "err": "the delivered DLI must be above zero"
+ },
+ {
+  "fn": "needTruth",
+  "args": [
+   -3,
+   2
+  ],
+  "err": "the delivered DLI must be above zero"
+ }
+]
