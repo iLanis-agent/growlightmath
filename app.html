@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grow Light Math</title>
+<style>
+  :root { --accent: #6b4a96; --warn: #a83232; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px 16px 64px; background: #f6f4f9; color: #26232b;
+         font-family: Georgia, 'Times New Roman', serif; }
+  main { max-width: 680px; margin: 0 auto; }
+  h1 { color: var(--accent); font-size: 2.2rem; margin: 0 0 4px; }
+  .tag { font-style: italic; color: var(--accent); margin: 0 0 28px; }
+  .boundary { border-left: 4px solid var(--warn); background: #fdf1f1; padding: 16px 20px;
+              border-radius: 8px; margin: 0 0 28px; }
+  .boundary h2 { color: var(--warn); font-size: 1.1rem; margin: 0 0 8px; }
+  .boundary p { margin: 0; line-height: 1.5; }
+  .card { background: #fff; border: 1px solid #e3dde9; border-left: 4px solid var(--accent);
+          border-radius: 8px; padding: 20px 24px; margin: 0 0 24px; }
+  .card h2 { margin: 0 0 14px; font-size: 1.25rem; }
+  label { display: block; font-size: 0.95rem; margin: 10px 0 4px; }
+  input, select { width: 100%; max-width: 220px; padding: 8px 10px; font-size: 1rem;
+          border: 1px solid #cfc6dc; border-radius: 6px; background: #f1edf6; }
+  .out { margin-top: 16px; font-size: 1.05rem; font-weight: bold; color: var(--accent);
+         line-height: 1.5; }
+  .out.err { color: var(--warn); }
+  footer { margin-top: 32px; font-size: 0.85rem; color: #8a8494; line-height: 1.5; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Grow Light Math</h1>
+  <p class="tag">Watt truth, DLI truth and need truth - labeled norms, honest arithmetic.</p>
+
+  <div class="boundary">
+    <h2>The boundary</h2>
+    <p>Grow Light Math keeps labeled-norm arithmetic only. Watt claims, PPFD charts and DLI
+    targets are published or typical norms, not measurements of your fixture or your plants -
+    real output depends on the driver, the diodes, the spectrum, the distance and the
+    reflectors, and crops vary by variety and stage. Trust a quantum meter and the seed
+    packet over anything this page says.</p>
+  </div>
+
+  <div class="card">
+    <h2>The watt truth</h2>
+    <label for="w-claim">Claimed "equivalent" watts</label>
+    <input id="w-claim" type="number" step="any" value="1000">
+    <label for="w-draw">Actual wall draw (watts)</label>
+    <input id="w-draw" type="number" step="any" value="100">
+    <p class="out" id="w-out"></p>
+  </div>
+
+  <div class="card">
+    <h2>The DLI truth</h2>
+    <label for="d-ppfd">Chart PPFD (µmol)</label>
+    <input id="d-ppfd" type="number" step="any" value="800">
+    <label for="d-refh">Chart height (inches)</label>
+    <input id="d-refh" type="number" step="any" value="12">
+    <label for="d-hang">Your hanging height (inches)</label>
+    <input id="d-hang" type="number" step="any" value="24">
+    <label for="d-hours">Hours on per day</label>
+    <input id="d-hours" type="number" step="any" value="16">
+    <p class="out" id="d-out"></p>
+  </div>
+
+  <div class="card">
+    <h2>The need truth</h2>
+    <label for="n-dli">Delivered DLI</label>
+    <input id="n-dli" type="number" step="any" value="11.5">
+    <label for="n-level">Crop appetite</label>
+    <select id="n-level">
+      <option value="0">gentle (DLI 8)</option>
+      <option value="1" selected>moderate (DLI 14)</option>
+      <option value="2">hungry (DLI 20)</option>
+    </select>
+    <p class="out" id="n-out"></p>
+  </div>
+
+  <footer>
+    Every figure here is hypothetical arithmetic on labeled norms, not a statement about any real
+    fixture, crop or tent. <a href="index.html">About Grow Light Math</a>
+  </footer>
+</main>
+<script src="engine.js"></script>
+<script>
+function num(id) { return parseFloat(document.getElementById(id).value); }
+function val(id) { return document.getElementById(id).value; }
+function render(id, fn) {
+  const el = document.getElementById(id);
+  try {
+    el.textContent = fn();
+    el.classList.remove("err");
+  } catch (e) {
+    el.textContent = e.message;
+    el.classList.add("err");
+  }
+}
+function update() {
+  render("w-out", () => wattTruth(num("w-claim"), num("w-draw")));
+  render("d-out", () => dliTruth(num("d-ppfd"), num("d-refh"), num("d-hang"), num("d-hours")));
+  render("n-out", () => needTruth(num("n-dli"), parseInt(val("n-level"), 10)));
+}
+document.querySelectorAll("input, select").forEach(i => {
+  i.addEventListener("input", update);
+  i.addEventListener("change", update);
+});
+update();
+</script>
+</body>
+</html>
